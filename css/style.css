@@ -425,6 +425,25 @@ section[id] { scroll-margin-top: 92px; }
 }
 .filter-count { margin-left: auto; font-size: .85rem; font-weight: 800; color: var(--muted); }
 
+.add-btn {
+  padding: 8px 18px;
+  background: var(--ink);
+  color: var(--paper);
+  border: var(--line);
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: .88rem;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--orange);
+  transition: transform .16s, box-shadow .16s;
+}
+.add-btn:hover {
+  color: var(--paper);
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--orange);
+}
+
 .dish-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(258px, 1fr));
@@ -619,6 +638,49 @@ section[id] { scroll-margin-top: 92px; }
   font-size: .9rem;
   color: #4a423b;
 }
+
+/* ---------- 14. 添加美食表单 ---------- */
+.add-form {
+  display: grid;
+  gap: 14px;
+  padding: 22px 24px 26px;
+}
+.field { display: grid; gap: 6px; }
+.field label { font-size: .78rem; font-weight: 900; letter-spacing: .04em; }
+.field input[type="text"],
+.field select {
+  width: 100%;
+  padding: 10px 12px;
+  background: #fff;
+  border: 1.5px solid var(--ink);
+  border-radius: 12px;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: .92rem;
+}
+.field input[type="text"]:focus,
+.field select:focus { outline: 3px solid var(--purple); outline-offset: 2px; }
+.field input[type="file"] { font-size: .84rem; color: var(--muted); }
+.add-preview {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  margin-top: 6px;
+  border: var(--line);
+  border-radius: 14px;
+}
+.add-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 4px;
+}
+.btn-sm {
+  padding: 9px 20px;
+  font-size: .88rem;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.btn-sm:hover { box-shadow: 4px 4px 0 var(--ink); }
 
 /* ---------- 9. 文化 ---------- */
 .culture { background: #fff1d6; border-block: var(--line); }

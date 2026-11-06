@@ -104,6 +104,7 @@
           <button class="filter" type="button" data-filter="mo" aria-pressed="false">馍类</button>
           <button class="filter" type="button" data-filter="snack" aria-pressed="false">小吃</button>
           <span class="filter-count" id="filterCount">共 8 道</span>
+          <button class="add-btn" type="button" id="openAdd">＋ 添加一道菜</button>
         </div>
 
         <!-- 卡片：data-cat 决定分类，template 里是弹窗详情 -->
@@ -340,6 +341,45 @@
       <button class="dialog-close" type="button" aria-label="关闭详情">×</button>
     </div>
     <div class="dialog-body" id="dishDialogBody"></div>
+  </dialog>
+
+  <!-- ================= 添加美食弹窗 ================= -->
+  <dialog class="dish-dialog add-dialog" id="addDialog" aria-labelledby="addDialogTitle">
+    <div class="dialog-head">
+      <h3 id="addDialogTitle">添加一道菜</h3>
+      <button class="dialog-close" type="button" data-close="add" aria-label="关闭">×</button>
+    </div>
+    <form class="add-form" id="addForm">
+      <div class="field">
+        <label for="addFile">美食图片 *</label>
+        <input type="file" id="addFile" accept="image/*">
+        <img class="add-preview" id="addPreview" alt="图片预览" hidden>
+      </div>
+      <div class="field">
+        <label for="addName">菜名 *</label>
+        <input type="text" id="addName" maxlength="12" placeholder="例如：粉汤羊血" required>
+      </div>
+      <div class="field">
+        <label for="addCat">分类</label>
+        <select id="addCat">
+          <option value="mian">面食</option>
+          <option value="mo">馍类</option>
+          <option value="snack">小吃</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="addDesc">一句话介绍</label>
+        <input type="text" id="addDesc" maxlength="30" placeholder="例如：西安人的深夜食堂">
+      </div>
+      <div class="field">
+        <label for="addMeta">地区 · 人均（可选）</label>
+        <input type="text" id="addMeta" maxlength="16" placeholder="西安 · 人均 ¥20">
+      </div>
+      <div class="add-actions">
+        <button class="btn btn-ghost btn-sm" type="button" data-close="add">取消</button>
+        <button class="btn btn-primary btn-sm" type="submit">添加</button>
+      </div>
+    </form>
   </dialog>
 
   <script src="js/main.js" defer></script>
