@@ -62,4 +62,23 @@
   dialog.addEventListener('click', function (event) {
     if (event.target === dialog) dialog.close();
   });
+
+  /* ---------- ③ 滚动时高亮当前导航 ---------- */
+  var navLinks = document.querySelectorAll('.site-nav a[data-nav]');
+  var sections = ['foods', 'culture', 'plan']
+    .map(function (id) { return document.getElementById(id); })
+    .filter(Boolean);
+
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach(function (link) {
+          link.classList.toggle('is-active', link.dataset.nav === entry.target.id);
+        });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+
+    sections.forEach(function (section) { observer.observe(section); });
+  }
 })();
