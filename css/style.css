@@ -396,3 +396,99 @@ section[id] { scroll-margin-top: 92px; }
 .s-2 { background: #d8f5e3; }
 .s-3 { background: #ffe0e9; }
 .s-4 { background: #e4deff; }
+
+/* ---------- 8. 美食列表 ---------- */
+.dish-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(258px, 1fr));
+  gap: 22px;
+}
+
+.dish-card {
+  position: relative;
+  background: #fff;
+  border: var(--line);
+  border-radius: var(--radius);
+  padding: 22px;
+  box-shadow: var(--shadow);
+  transition: transform .2s, box-shadow .2s;
+}
+.dish-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: var(--shadow-lg);
+}
+.dish-card:focus-within { outline: 3px solid var(--purple); outline-offset: 4px; }
+.dish-card.is-hide { display: none; }
+
+.dish-emoji {
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  font-size: 1.9rem;
+  border: var(--line);
+  border-radius: 18px;
+  margin-bottom: 14px;
+  background: var(--yellow);
+}
+.dish-card[data-cat="mian"] .dish-emoji { background: #ffe9c7; }
+.dish-card[data-cat="mo"] .dish-emoji { background: #ffdcd3; }
+.dish-card[data-cat="snack"] .dish-emoji { background: #d8f5e3; }
+
+/* 换成实拍图时，把 <div class="dish-emoji"> 换成
+   <img class="dish-photo" src="images/xxx.jpg" alt="菜名"> 即可 */
+.dish-photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: var(--line);
+  border-radius: 16px;
+  margin-bottom: 14px;
+}
+
+.dish-chip {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: .7rem;
+  font-weight: 900;
+  padding: 2px 10px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  background: var(--paper);
+}
+
+.dish-name { font-size: 1.3rem; }
+.dish-open {
+  all: unset;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+/* 整张卡片可点：按钮伪元素铺满 */
+.dish-open::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+}
+
+.dish-meta {
+  margin-top: 4px;
+  font-size: .78rem;
+  font-weight: 800;
+  color: var(--muted);
+}
+.dish-summary { margin-top: 10px; font-size: .92rem; color: #4a423b; }
+
+.dish-arrow {
+  position: absolute;
+  right: 20px;
+  bottom: 16px;
+  font-size: 1.15rem;
+  font-weight: 900;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity .2s, transform .2s;
+}
+.dish-card:hover .dish-arrow { opacity: 1; transform: translateX(0); }

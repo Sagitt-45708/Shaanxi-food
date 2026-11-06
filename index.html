@@ -87,6 +87,166 @@
       </div>
     </section>
 
+    <!-- ================= 美食列表 ================= -->
+    <section class="section foods" id="foods">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="eyebrow">Food Guide</p>
+          <h2>先吃哪一口？</h2>
+          <p class="section-lead">按类型筛选，点开卡片看做法、吃法和只有本地人才知道的小讲究。</p>
+        </header>
+
+        <!-- 卡片：data-cat 决定分类，template 里是弹窗详情 -->
+        <div class="dish-grid" id="dishGrid">
+
+          <article class="dish-card" data-cat="mo">
+            <div class="dish-emoji" aria-hidden="true">🥙</div>
+            <span class="dish-chip">馍类</span>
+            <h3 class="dish-name"><button class="dish-open" type="button" data-name="肉夹馍">肉夹馍</button></h3>
+            <p class="dish-meta">西安 · 人均 ¥12</p>
+            <p class="dish-summary">白吉馍夹腊汁肉，“中式汉堡”的鼻祖。</p>
+            <span class="dish-arrow" aria-hidden="true">→</span>
+            <template class="dish-detail">
+              <p class="detail-lead">腊汁肉用老汤慢炖数小时，肥瘦相间、入口即化；白吉馍讲究“铁圈虎背菊花心”，外脆里软。趁热夹上，肉汁渗进馍里，一口下去满嘴油香。</p>
+              <h4>怎么吃</h4>
+              <ul>
+                <li>点“肥瘦”版本最香，纯瘦会柴。</li>
+                <li>配一碗粉丝汤，或者一瓶冰峰汽水。</li>
+              </ul>
+              <p class="detail-tip">小贴士：老西安人说“肉夹馍”其实是“肉夹于馍”的倒装，古汉语的习惯。</p>
+            </template>
+          </article>
+
+          <article class="dish-card" data-cat="mo">
+            <div class="dish-emoji" aria-hidden="true">🍲</div>
+            <span class="dish-chip">馍类</span>
+            <h3 class="dish-name"><button class="dish-open" type="button" data-name="羊肉泡馍">羊肉泡馍</button></h3>
+            <p class="dish-meta">西安 · 人均 ¥35</p>
+            <p class="dish-summary">一碗要自己动手掰馍的“慢食”。</p>
+            <span class="dish-arrow" aria-hidden="true">→</span>
+            <template class="dish-detail">
+              <p class="detail-lead">汤用羊肉、羊骨加香料熬足一夜，汤色乳白。馍要自己掰成黄豆大小，师傅再浇汤回锅，配糖蒜、辣酱、香菜，热气腾腾一大碗。</p>
+              <h4>怎么吃</h4>
+              <ul>
+                <li>馍掰得越小越入味，别偷懒用机器切的。</li>
+                <li>先喝一口汤，再把糖蒜咬开解腻。</li>
+              </ul>
+              <p class="detail-tip">小贴士：老字号分“口汤”“干泡”“水围城”几种吃法，区别在汤多汤少。</p>
+            </template>
+          </article>
+
+          <article class="dish-card" data-cat="mian">
+            <div class="dish-emoji" aria-hidden="true">🍜</div>
+            <span class="dish-chip">面食</span>
+            <h3 class="dish-name"><button class="dish-open" type="button" data-name="biangbiang 面">biangbiang 面</button></h3>
+            <p class="dish-meta">西安 · 人均 ¥18</p>
+            <p class="dish-summary">一根面有裤带宽，泼上热油“刺啦”一声。</p>
+            <span class="dish-arrow" aria-hidden="true">→</span>
+            <template class="dish-detail">
+              <p class="detail-lead">面团醒好后扯成宽厚长条，下锅煮熟，铺上辣椒面、蒜末、葱花，一勺滚油泼上去，再调醋和酱油。面宽厚筋道，辣香直冲鼻子。</p>
+              <h4>怎么吃</h4>
+              <ul>
+                <li>上桌立刻拌开，别等凉了坨住。</li>
+                <li>能吃辣就让师傅多放一勺油泼辣子。</li>
+              </ul>
+              <p class="detail-tip">小贴士：“biang”是关中方言造的字，民谣唱：“一点飞上天，黄河两道弯……”</p>
+            </template>
+          </article>
+
+          <article class="dish-card" data-cat="mian">
+            <div class="dish-emoji" aria-hidden="true">🥣</div>
+            <span class="dish-chip">面食</span>
+            <h3 class="dish-name"><button class="dish-open" type="button" data-name="岐山臊子面">岐山臊子面</button></h3>
+            <p class="dish-meta">宝鸡岐山 · 人均 ¥15</p>
+            <p class="dish-summary">一碗面，酸辣香，汤要“煎稀汪”。</p>
+            <span class="dish-arrow" aria-hidden="true">→</span>
+            <template class="dish-detail">
+              <p class="detail-lead">臊子用猪肉丁炒制，加醋、辣椒面、香料慢炖；面薄筋光，汤酸辣鲜香，上面漂着黄花、木耳、豆腐、鸡蛋皮，红黄绿白黑五色俱全。</p>
+              <h4>怎么吃</h4>
+              <ul>
+                <li>面少汤多，连汤带面一起吸溜。</li>
+                <li>岐山人待客讲究“薄筋光、煎稀汪”。</li>
+              </ul>
+              <p class="detail-tip">小贴士：在岐山，一碗面只盛一筷头，吃完再添，叫“一口香”。</p>
+            </template>
+          </article>
+
+          <article class="dish-card" data-cat="snack">
+            <div class="dish-emoji" aria-hidden="true">🥗</div>
+            <span class="dish-chip">小吃</span>
+            <h3 class="dish-name"><button class="dish-open" type="button" data-name="凉皮">凉皮</button></h3>
+            <p class="dish-meta">西安 / 汉中 · 人均 ¥10</p>
+            <p class="dish-summary">夏天救命，冬天也戒不掉。</p>
+            <span class="dish-arrow" aria-hidden="true">→</span>
+            <template class="dish-detail">
+              <p class="detail-lead">米皮或面皮蒸熟切条，浇上醋、蒜水、辣椒油、盐水，配黄瓜丝、豆芽。秦镇米皮软糯，汉中面皮筋道，各有各的拥趸。</p>
+              <h4>怎么吃</h4>
+              <ul>
+                <li>拌透再吃，让每根皮都裹上辣油。</li>
+                <li>配肉夹馍和冰峰，就是“三秦套餐”。</li>
+              </ul>
+              <p class="detail-tip">小贴士：辣椒油是灵魂，每家店的配方都是不外传的秘密。</p>
+            </template>
+          </article>
+
+          <article class="dish-card" data-cat="mo">
+            <div class="dish-emoji" aria-hidden="true">🥘</div>
+            <span class="dish-chip">馍类</span>
+            <h3 class="dish-name"><button class="dish-open" type="button" data-name="葫芦头泡馍">葫芦头泡馍</button></h3>
+            <p class="dish-meta">西安 · 人均 ¥30</p>
+            <p class="dish-summary">比羊肉泡馍更“硬核”的一碗。</p>
+            <span class="dish-arrow" aria-hidden="true">→</span>
+            <template class="dish-detail">
+              <p class="detail-lead">主料是猪大肠，因肠段形似葫芦而得名；汤浓味厚，配掰碎的馍、粉丝、木耳，撒一把香菜，是老西安的深夜慰藉。</p>
+              <h4>怎么吃</h4>
+              <ul>
+                <li>趁热吃，凉了会有腥气。</li>
+                <li>配糖蒜和辣酱，解腻又提味。</li>
+              </ul>
+              <p class="detail-tip">小贴士：相传这碗汤和药王孙思邈有关，他送的药葫芦让汤更香。</p>
+            </template>
+          </article>
+
+          <article class="dish-card" data-cat="snack">
+            <div class="dish-emoji" aria-hidden="true">🍰</div>
+            <span class="dish-chip">小吃</span>
+            <h3 class="dish-name"><button class="dish-open" type="button" data-name="甑糕">甑糕</button></h3>
+            <p class="dish-meta">西安 · 人均 ¥8</p>
+            <p class="dish-summary">糯米、红枣、芸豆，蒸一夜的甜。</p>
+            <span class="dish-arrow" aria-hidden="true">→</span>
+            <template class="dish-detail">
+              <p class="detail-lead">用“甑”这种古老炊具，一层米、一层枣、一层豆铺好，慢火蒸透。米软枣甜，豆沙绵密，切一块捧在手里，是西安人的经典早餐。</p>
+              <h4>怎么吃</h4>
+              <ul>
+                <li>早上去回民街买刚出锅的，热着吃最糯。</li>
+                <li>配一碗油茶，甜咸搭配。</li>
+              </ul>
+              <p class="detail-tip">小贴士：读作 zèng gāo，不读“jìng”。</p>
+            </template>
+          </article>
+
+          <article class="dish-card" data-cat="snack">
+            <div class="dish-emoji" aria-hidden="true">🍪</div>
+            <span class="dish-chip">小吃</span>
+            <h3 class="dish-name"><button class="dish-open" type="button" data-name="黄桂柿子饼">黄桂柿子饼</button></h3>
+            <p class="dish-meta">西安临潼 · 人均 ¥6</p>
+            <p class="dish-summary">用临潼火晶柿子做的甜点。</p>
+            <span class="dish-arrow" aria-hidden="true">→</span>
+            <template class="dish-detail">
+              <p class="detail-lead">火晶柿子去皮和面，包入黄桂、核桃、糖馅，油煎至两面金黄。外皮微脆，内里软糯流心，柿子的清甜混着桂花香。</p>
+              <h4>怎么吃</h4>
+              <ul>
+                <li>出锅趁热吃，小心烫嘴。</li>
+                <li>秋天柿子上市时才最好吃。</li>
+              </ul>
+              <p class="detail-tip">小贴士：临潼火晶柿子皮薄如纸、甜如蜜，是这道点心的灵魂。</p>
+            </template>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <script src="js/main.js" defer></script>
