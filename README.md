@@ -1,5 +1,7 @@
 # 陕西美食 · 三秦味道
 
+![陕西美食 · 三秦味道](images/og-cover.jpg)
+
 一个介绍陕西美食的静态网页，纯 HTML + CSS + 原生 JavaScript，**不需要服务器**，双击 `index.html` 就能看。
 
 课程：Web Technologies　｜　完成时间：2026 年 11 月
