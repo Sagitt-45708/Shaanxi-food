@@ -96,6 +96,15 @@
           <p class="section-lead">按类型筛选，点开卡片看做法、吃法和只有本地人才知道的小讲究。</p>
         </header>
 
+        <!-- 分类筛选按钮 -->
+        <div class="filters" role="group" aria-label="按类型筛选美食">
+          <button class="filter is-active" type="button" data-filter="all" aria-pressed="true">全部</button>
+          <button class="filter" type="button" data-filter="mian" aria-pressed="false">面食</button>
+          <button class="filter" type="button" data-filter="mo" aria-pressed="false">馍类</button>
+          <button class="filter" type="button" data-filter="snack" aria-pressed="false">小吃</button>
+          <span class="filter-count" id="filterCount">共 8 道</span>
+        </div>
+
         <!-- 卡片：data-cat 决定分类，template 里是弹窗详情 -->
         <div class="dish-grid" id="dishGrid">
 

@@ -398,6 +398,33 @@ section[id] { scroll-margin-top: 92px; }
 .s-4 { background: #e4deff; }
 
 /* ---------- 8. 美食列表 ---------- */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.filter {
+  padding: 8px 20px;
+  background: #fff;
+  color: var(--ink);
+  border: var(--line);
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: .92rem;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform .16s, box-shadow .16s, background .16s;
+}
+.filter:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--ink); }
+.filter.is-active {
+  background: var(--orange);
+  color: #fff;
+}
+.filter-count { margin-left: auto; font-size: .85rem; font-weight: 800; color: var(--muted); }
+
 .dish-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(258px, 1fr));
