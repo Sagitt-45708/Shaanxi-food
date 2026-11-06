@@ -24,7 +24,8 @@ shaanxi-food/
 │   └── main.js         三个小功能：筛选 / 弹窗 / 导航高亮
 ├── images/
 │   ├── favicon.svg     站点小图标
-│   └── README.md       实拍图的文件名与尺寸约定
+│   ├── 8 张菜品实拍图   roujiamo.jpg 等，见 images/README.md
+│   └── README.md       图片文件名与尺寸约定
 └── README.md
 ```
 
@@ -41,7 +42,7 @@ shaanxi-food/
 | 一日食单 | 从 07:00 到 22:00 的时间线 |
 | 页脚 | 课程信息、回到顶部 |
 
-技术点：语义化标签（header/main/section/article/footer）、CSS 变量、Grid + Flex 布局、媒体查询响应式、`:focus-visible` 键盘焦点、`prefers-reduced-motion`、原生 `<dialog>`、`IntersectionObserver` 导航高亮、`<template>` 存详情内容、纯 CSS 滚动条幅与漂浮动画。
+技术点：语义化标签（header/main/section/article/footer）、CSS 变量、Grid + Flex 布局、媒体查询响应式、`:focus-visible` 键盘焦点、`prefers-reduced-motion`、原生 `<dialog>`、`IntersectionObserver` 导航高亮、`<template>` 存详情内容、纯 CSS 滚动条幅与漂浮动画、图片懒加载（`loading="lazy"`）。
 
 视觉风格：**年轻活泼**——奶油底色、粗黑描边、硬阴影（贴纸感）、马克笔高亮标题、橙 / 黄 / 绿 / 紫撞色。
 
@@ -49,8 +50,7 @@ shaanxi-food/
 
 - **改文字**：直接改 `index.html` 里对应卡片的中文。
 - **加一道菜**：复制一个 `<article class="dish-card" data-cat="mo">…</article>`，改 `data-cat`、emoji、标题、简介和 `<template>` 里的详情。
-- **换成实拍图**：把图放进 `images/`（文件名见 `images/README.md`），把 `<div class="dish-emoji">🥙</div>` 换成
-  `<img class="dish-photo" src="images/roujiamo.jpg" alt="肉夹馍">`，样式已经写好，不用改 CSS。
+- **换图**：直接用同名文件覆盖 `images/` 里的图片即可（文件名见 `images/README.md`），不用改代码。想新增一道菜并配图，复制一张图进来，把 `<img class="dish-photo" src="images/xxx.jpg" alt="菜名">` 里的路径改掉。
 - **改配色**：只改 `css/style.css` 开头 `:root` 里的变量，全站跟着变。
 
 ## 五、Git 提交规范
@@ -90,6 +90,8 @@ shaanxi-food/
 | 10 | `style: 完成页脚与响应式适配` | 页脚、两个断点、减少动效 |
 | 11 | `feat: 导航随滚动高亮` | IntersectionObserver |
 | 12 | `docs: 完善 README 与站点图标` | 文档、favicon、图片说明 |
+| 13 | `feat: 使用实拍图替换图形占位` | 8 张实拍图接入卡片 |
+| 14 | `docs: 更新图片使用说明` | 目录结构、换图方式 |
 
 ### 常用命令
 
