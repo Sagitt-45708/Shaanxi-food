@@ -35,4 +35,31 @@
       filterDishes(btn.dataset.filter);
     });
   });
+
+  /* ---------- ② 详情弹窗 ---------- */
+  var dialog = document.getElementById('dishDialog');
+  var dialogTitle = document.getElementById('dishDialogTitle');
+  var dialogBody = document.getElementById('dishDialogBody');
+
+  document.querySelectorAll('.dish-open').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var card = btn.closest('.dish-card');
+      var template = card.querySelector('.dish-detail');
+
+      dialogTitle.textContent = btn.dataset.name;
+      dialogBody.innerHTML = '';
+      dialogBody.appendChild(template.content.cloneNode(true));
+      dialog.showModal();
+    });
+  });
+
+  // 关闭按钮
+  dialog.querySelector('.dialog-close').addEventListener('click', function () {
+    dialog.close();
+  });
+
+  // 点击遮罩关闭：只有点在 dialog 本身（而不是内容区）时才算
+  dialog.addEventListener('click', function (event) {
+    if (event.target === dialog) dialog.close();
+  });
 })();

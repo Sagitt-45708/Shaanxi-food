@@ -519,3 +519,68 @@ section[id] { scroll-margin-top: 92px; }
   transition: opacity .2s, transform .2s;
 }
 .dish-card:hover .dish-arrow { opacity: 1; transform: translateX(0); }
+
+/* ---------- 12. 详情弹窗 ---------- */
+.dish-dialog {
+  border: var(--line);
+  border-radius: 24px;
+  padding: 0;
+  width: min(92vw, 620px);
+  max-height: 84vh;
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 10px 10px 0 rgba(31, 26, 23, .9);
+  overflow: auto;
+}
+.dish-dialog::backdrop {
+  background: rgba(31, 26, 23, .58);
+  backdrop-filter: blur(3px);
+}
+.dialog-head {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  background: #fff;
+  border-bottom: var(--line);
+}
+.dialog-head h3 { font-size: 1.45rem; }
+.dialog-close {
+  all: unset;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: var(--line);
+  border-radius: 50%;
+  font-size: 1.3rem;
+  line-height: 1;
+  background: var(--paper);
+  transition: background .16s, transform .16s;
+}
+.dialog-close:hover { background: var(--yellow); transform: rotate(90deg); }
+
+.dialog-body { padding: 22px 24px 28px; }
+.dialog-body p { color: #4a423b; }
+.dialog-body .detail-lead { color: var(--ink); }
+.dialog-body h4 {
+  font-size: .76rem;
+  letter-spacing: .16em;
+  color: var(--red);
+  margin: 20px 0 8px;
+}
+.dialog-body ul { font-size: .94rem; color: #4a423b; }
+.dialog-body li { margin-bottom: 6px; }
+.detail-tip {
+  margin-top: 20px;
+  padding: 14px 16px;
+  background: #fff6d8;
+  border: 1.5px dashed var(--ink);
+  border-radius: 12px 12px 12px 4px;
+  font-size: .9rem;
+  color: #4a423b;
+}
