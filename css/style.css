@@ -342,3 +342,57 @@ section[id] { scroll-margin-top: 92px; }
   0%, 100% { transform: translateY(0) rotate(var(--rot)); }
   50% { transform: translateY(-14px) rotate(var(--rot)); }
 }
+
+/* ---------- 6. 滚动条幅 ---------- */
+.marquee {
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 14px 0;
+  border-block: var(--line);
+}
+.marquee-track {
+  display: flex;
+  gap: 30px;
+  width: max-content;
+  animation: marquee 32s linear infinite;
+  font-weight: 900;
+  font-size: 1rem;
+  letter-spacing: .06em;
+  white-space: nowrap;
+}
+.marquee-track span:nth-child(even) { color: var(--yellow); }
+
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+
+/* ---------- 7. 数据条 ---------- */
+.stats { padding: 44px 0; }
+.stats-inner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+.stat {
+  text-align: center;
+  padding: 18px 10px;
+  border: var(--line);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  background: #fff;
+  transition: transform .16s;
+}
+.stat:hover { transform: translate(-2px, -2px); }
+.stat b {
+  display: block;
+  font-size: clamp(1.7rem, 3vw, 2.2rem);
+  font-weight: 900;
+  line-height: 1.1;
+}
+.stat b sup { font-size: .5em; color: var(--red); }
+.stat span { display: block; font-size: .82rem; font-weight: 700; color: var(--muted); margin-top: 4px; }
+.s-1 { background: #ffe9c7; }
+.s-2 { background: #d8f5e3; }
+.s-3 { background: #ffe0e9; }
+.s-4 { background: #e4deff; }
