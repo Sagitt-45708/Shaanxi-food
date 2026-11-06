@@ -584,3 +584,65 @@ section[id] { scroll-margin-top: 92px; }
   font-size: .9rem;
   color: #4a423b;
 }
+
+/* ---------- 9. 文化 ---------- */
+.culture { background: #fff1d6; border-block: var(--line); }
+.culture-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.culture-card {
+  position: relative;
+  background: #fff;
+  border: var(--line);
+  border-radius: var(--radius);
+  padding: 26px 24px;
+  box-shadow: var(--shadow);
+  transition: transform .2s, box-shadow .2s;
+}
+.culture-card:hover { transform: rotate(0) translateY(-4px); box-shadow: var(--shadow-lg); }
+.c-1 { transform: rotate(-1.2deg); }
+.c-2 { transform: rotate(.8deg); }
+.c-3 { transform: rotate(-.6deg); }
+
+.culture-icon { display: block; font-size: 1.9rem; line-height: 1.2; }
+.culture-num {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  font-size: 1.7rem;
+  font-weight: 900;
+  opacity: .12;
+}
+.culture-card h3 { font-size: 1.12rem; margin: 8px 0 10px; }
+.culture-card p { font-size: .92rem; color: #4a423b; }
+
+/* ---------- 10. 一日食单 ---------- */
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 800px;
+}
+.timeline li {
+  display: grid;
+  grid-template-columns: 108px 1fr;
+  gap: 22px;
+  padding: 18px 0;
+  border-bottom: 2px dashed #e6d6c2;
+  align-items: start;
+}
+.timeline li:last-child { border-bottom: 0; }
+.timeline time {
+  justify-self: start;
+  font-weight: 900;
+  font-size: 1rem;
+  background: var(--yellow);
+  border: var(--line);
+  border-radius: 999px;
+  padding: 3px 14px;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.timeline h3 { font-size: 1.06rem; margin-bottom: 4px; }
+.timeline p { font-size: .9rem; color: var(--muted); }
