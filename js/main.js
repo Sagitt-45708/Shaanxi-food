@@ -9,6 +9,59 @@
 
   var CAT_LABELS = { mian: '面食', mo: '馍类', snack: '小吃' };
 
+  // 访客添加的菜存本机浏览器里，刷新后还在
+  var STORAGE_KEY = 'shaanxi-food-user-dishes-v1';
+
+  function loadUserDishes() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    } catch (err) {
+      return [];
+    }
+  }
+
+  function saveUserDishes() {
+    var items = getCards()
+      .filter(function (card) { return card.dataset.user === '1'; })
+      .map(function (card) {
+        return {
+          name: card.dataset.name,
+          cat: card.dataset.cat,
+          desc: card.dataset.desc,
+          meta: card.querySelector('.dish-meta').textContent,
+          img: card.querySelector('.dish-photo').src
+        };
+      });
+
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+    } catch (err) {
+      console.warn('本地保存失败，可能是图片太大：', err);
+    }
+  }
+
+  // 把图片压到最长边 900px 的 JPEG，避免撑爆 localStorage
+  function readImage(file) {
+    return new Promise(function (resolve, reject) {
+      var reader = new FileReader();
+      reader.onload = function () {
+        var img = new Image();
+        img.onload = function () {
+          var scale = Math.min(1, 900 / Math.max(img.width, img.height));
+          var canvas = document.createElement('canvas');
+          canvas.width = Math.round(img.width * scale);
+          canvas.height = Math.round(img.height * scale);
+          canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+          resolve(canvas.toDataURL('image/jpeg', 0.82));
+        };
+        img.onerror = reject;
+        img.src = reader.result;
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
   // 每次现查：因为用户可以随时往网格里加卡片
   function getCards() {
     return Array.prototype.slice.call(document.querySelectorAll('.dish-card'));
@@ -104,6 +157,7 @@
     card.className = 'dish-card';
     card.dataset.cat = dish.cat;
     card.dataset.user = '1';
+    card.dataset.name = dish.name;
     card.dataset.desc = dish.desc || '';
 
     var img = document.createElement('img');
@@ -143,6 +197,20 @@
     arrow.textContent = '→';
     card.appendChild(arrow);
 
+    // 自己加的卡片可以删掉
+    var del = document.createElement('button');
+    del.type = 'button';
+    del.className = 'dish-del';
+    del.setAttribute('aria-label', '删除「' + dish.name + '」');
+    del.textContent = '×';
+    del.addEventListener('click', function (event) {
+      event.stopPropagation();
+      card.remove();
+      saveUserDishes();
+      filterDishes(currentFilter);
+    });
+    card.appendChild(del);
+
     return card;
   }
 
@@ -179,20 +247,32 @@
     if (!file) { addFile.focus(); return; }
     if (!name) { addName.focus(); return; }
 
-    var card = createUserCard({
-      name: name,
-      cat: addCat.value,
-      desc: addDesc.value.trim(),
-      meta: addMeta.value.trim() || '访客添加',
-      img: URL.createObjectURL(file)
-    });
+    readImage(file).then(function (dataUrl) {
+      var card = createUserCard({
+        name: name,
+        cat: addCat.value,
+        desc: addDesc.value.trim(),
+        meta: addMeta.value.trim() || '访客添加',
+        img: dataUrl
+      });
 
-    grid.appendChild(card);
-    addDialog.close();
-    filterDishes('all');
-    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    card.querySelector('.dish-open').focus();
+      grid.appendChild(card);
+      saveUserDishes();
+
+      addDialog.close();
+      filterDishes('all');
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      card.querySelector('.dish-open').focus();
+    }).catch(function () {
+      alert('图片读不出来，换一张试试（建议 JPG / PNG）。');
+    });
   });
+
+  // 页面打开时，把之前添加过的卡片放回网格
+  loadUserDishes().forEach(function (dish) {
+    grid.appendChild(createUserCard(dish));
+  });
+  filterDishes('all');
 
   /* ---------- ④ 滚动时高亮当前导航 ---------- */
   var navLinks = document.querySelectorAll('.site-nav a[data-nav]');

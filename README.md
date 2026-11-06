@@ -38,11 +38,12 @@ shaanxi-food/
 | 滚动条幅 | 纯 CSS 无缝滚动展示招牌菜名 |
 | 数据条 | 4 个数字：8 道菜、3000 年、50+ 画、1 座碳水之都 |
 | 美食列表 | 8 道菜卡片，可筛选「全部 / 面食 / 馍类 / 小吃」，点卡片弹出详情 |
+| 添加菜品 | 点「＋ 添加一道菜」选本地图片、填菜名与分类，即时生成新卡片，存在浏览器本地 |
 | 文化 | 掰馍、biang 字、三秦套餐 3 张卡 |
 | 一日食单 | 从 07:00 到 22:00 的时间线 |
 | 页脚 | 课程信息、回到顶部 |
 
-技术点：语义化标签（header/main/section/article/footer）、CSS 变量、Grid + Flex 布局、媒体查询响应式、`:focus-visible` 键盘焦点、`prefers-reduced-motion`、原生 `<dialog>`、`IntersectionObserver` 导航高亮、`<template>` 存详情内容、纯 CSS 滚动条幅与漂浮动画、图片懒加载（`loading="lazy"`）。
+技术点：语义化标签（header/main/section/article/footer）、CSS 变量、Grid + Flex 布局、媒体查询响应式、`:focus-visible` 键盘焦点、`prefers-reduced-motion`、原生 `<dialog>`、`IntersectionObserver` 导航高亮、`<template>` 存详情内容、纯 CSS 滚动条幅与漂浮动画、图片懒加载（`loading="lazy"`）、`FileReader` + `Canvas` 压缩图片、`localStorage` 本地保存。
 
 视觉风格：**年轻活泼**——奶油底色、粗黑描边、硬阴影（贴纸感）、马克笔高亮标题、橙 / 黄 / 绿 / 紫撞色。
 
@@ -92,6 +93,8 @@ shaanxi-food/
 | 12 | `docs: 完善 README 与站点图标` | 文档、favicon、图片说明 |
 | 13 | `feat: 使用实拍图替换图形占位` | 8 张实拍图接入卡片 |
 | 14 | `docs: 更新图片使用说明` | 目录结构、换图方式 |
+| 15 | `feat: 添加「添加一道菜」按钮与表单` | 按钮、弹窗表单、即时生成卡片 |
+| 16 | `feat: 图片压缩与本地保存` | Canvas 压缩、localStorage 持久化、删除卡片 |
 
 ### 常用命令
 
