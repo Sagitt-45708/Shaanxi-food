@@ -520,6 +520,41 @@ section[id] { scroll-margin-top: 92px; }
 }
 .dish-card:hover .dish-arrow { opacity: 1; transform: translateX(0); }
 
+/* ---------- 11. 页脚 ---------- */
+.site-footer {
+  background: var(--ink);
+  color: #f3e9de;
+  padding: 46px 0 26px;
+}
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-brand { font-size: 1.3rem; font-weight: 900; color: #fff; }
+.footer-note { font-size: .82rem; margin-top: 4px; color: #c9bcae; }
+.back-top {
+  padding: 8px 18px;
+  background: var(--yellow);
+  color: var(--ink);
+  border: 2px solid #f3e9de;
+  border-radius: 999px;
+  font-weight: 900;
+  font-size: .88rem;
+  box-shadow: 3px 3px 0 rgba(243, 233, 222, .9);
+}
+.back-top:hover { color: var(--ink); transform: translate(-1px, -1px); }
+.footer-copy {
+  width: min(100% - 44px, var(--maxw));
+  margin: 24px auto 0;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, .14);
+  font-size: .76rem;
+  color: #9c9084;
+}
+
 /* ---------- 12. 详情弹窗 ---------- */
 .dish-dialog {
   border: var(--line);
@@ -646,3 +681,41 @@ section[id] { scroll-margin-top: 92px; }
 }
 .timeline h3 { font-size: 1.06rem; margin-bottom: 4px; }
 .timeline p { font-size: .9rem; color: var(--muted); }
+
+/* ---------- 13. 响应式 ---------- */
+@media (max-width: 960px) {
+  .hero { padding: 64px 0 56px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 30px; }
+  .hero-art { display: none; }
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+  .culture-grid { grid-template-columns: 1fr; }
+  .c-1, .c-2, .c-3 { transform: none; }
+}
+
+@media (max-width: 600px) {
+  .section { padding: 60px 0; }
+  .header-inner { height: 62px; gap: 10px; }
+  .header-cta { display: none; }
+  .brand-text small { display: none; }
+  .site-nav a { padding: 7px 11px; font-size: .86rem; }
+  .hero h1 { font-size: 2.5rem; }
+  .hero-actions .btn { flex: 1 1 auto; text-align: center; }
+  .filters { gap: 8px; }
+  .filter { padding: 7px 15px; font-size: .85rem; }
+  .filter-count { width: 100%; margin-left: 0; }
+  .dish-grid { gap: 16px; }
+  .timeline li { grid-template-columns: 92px 1fr; gap: 14px; }
+  .timeline time { font-size: .9rem; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+  .dialog-head { padding: 16px 20px; }
+  .dialog-body { padding: 18px 20px 24px; }
+}
+
+/* 尊重“减少动态效果”的系统设置 */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
