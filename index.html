@@ -61,7 +61,7 @@
           <div class="hero-actions">
             <a class="btn btn-primary" href="#foods">看看吃什么</a>
             <a class="btn btn-ghost" href="#culture">了解面食文化</a>
-            <button class="btn btn-install" type="button" id="installBtn" hidden>↓ 安装到桌面</button>
+            <button class="btn btn-install" type="button" id="installBtn">↓ 安装到手机</button>
           </div>
           <ul class="hero-tags" aria-label="关键词">
             <li>手工现做</li>
@@ -402,13 +402,36 @@
       <button class="dialog-close" type="button" data-close="install" aria-label="关闭">×</button>
     </div>
     <div class="dialog-body">
-      <p class="detail-lead">iOS 的 Safari 不支持一键安装，按这三步来：</p>
-      <ol class="install-steps">
-        <li>点浏览器<strong>底部中间</strong>的「分享」按钮（方框带向上箭头）</li>
-        <li>在弹出菜单里往下滑，选「<strong>添加到主屏幕</strong>」</li>
-        <li>右上角点「添加」，桌面就会出现橙色「陕」字图标</li>
-      </ol>
-      <p class="detail-tip">装好后点开是全屏的，没有地址栏，断网也能打开。</p>
+      <p class="detail-lead">这是网页应用，没有 apk / ipa 安装包。装到桌面后可以全屏打开、断网也能用。</p>
+
+      <div data-platform="ios">
+        <h4>iPhone / iPad：用 Safari</h4>
+        <ol class="install-steps">
+          <li>点底部中间的「<strong>分享</strong>」按钮（方框带向上箭头）</li>
+          <li>菜单往下滑，选「<strong>添加到主屏幕</strong>」</li>
+          <li>右上角点「添加」，桌面出现橙色「陕」字图标</li>
+        </ol>
+      </div>
+
+      <div data-platform="android">
+        <h4>Android：用 Chrome / Edge</h4>
+        <ol class="install-steps">
+          <li>点右上角 <strong>⋮</strong> 菜单</li>
+          <li>选「<strong>安装应用</strong>」或「添加到主屏幕」</li>
+          <li>确认后桌面出现橙色「陕」字图标</li>
+        </ol>
+      </div>
+
+      <div data-platform="wechat">
+        <h4>微信内置浏览器不能安装</h4>
+        <ol class="install-steps">
+          <li>点右上角 <strong>···</strong></li>
+          <li>选「<strong>在浏览器打开</strong>」</li>
+          <li>到浏览器里，再点本页的「安装到手机」</li>
+        </ol>
+      </div>
+
+      <p class="detail-tip">装好后点开是全屏的，没有地址栏，断网也能看。</p>
     </div>
   </dialog>
 

@@ -302,27 +302,42 @@
     });
   }
 
-  /* ---------- ⑥ 安装到桌面 ---------- */
+  /* ---------- ⑥ 安装到手机 / 桌面 ---------- */
   var installBtn = document.getElementById('installBtn');
   var installDialog = document.getElementById('installDialog');
   var deferredPrompt = null;
 
-  // Chrome / Edge / Android：浏览器判断可安装时，先把事件存下来
+  // 支持一键安装的浏览器会抛这个事件，先存下来，点按钮时再弹系统框
   window.addEventListener('beforeinstallprompt', function (event) {
     event.preventDefault();
     deferredPrompt = event;
-    installBtn.hidden = false;
   });
 
-  // iOS Safari 不触发上面的事件，只能给手动步骤
-  var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  var ua = navigator.userAgent;
+  var isIOS = /iphone|ipad|ipod/i.test(ua);
+  var isWeChat = /micromessenger/i.test(ua);
   var isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
                      window.navigator.standalone === true;
-  if (isIOS && !isStandalone) installBtn.hidden = false;
+
+  // 已经装成 App 了，就不必再显示按钮
+  if (isStandalone) installBtn.hidden = true;
+
+  // 点到按钮但没法一键安装时，按平台给对应步骤
+  function openInstallHelp() {
+    installDialog.querySelectorAll('[data-platform]').forEach(function (block) {
+      block.hidden = true;
+    });
+
+    var key = isWeChat ? 'wechat' : (isIOS ? 'ios' : 'android');
+    var target = installDialog.querySelector('[data-platform="' + key + '"]');
+    if (target) target.hidden = false;
+
+    installDialog.showModal();
+  }
 
   installBtn.addEventListener('click', function () {
-    if (!deferredPrompt) {
-      installDialog.showModal();
+    if (isWeChat || !deferredPrompt) {
+      openInstallHelp();
       return;
     }
 
