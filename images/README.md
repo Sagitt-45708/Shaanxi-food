@@ -13,6 +13,15 @@
 | `zenggao.jpg` | 甑糕 |
 | `shizibing.jpg` | 黄桂柿子饼 |
 
+## 图标文件
+
+| 文件 | 用途 |
+| --- | --- |
+| `favicon.svg` / `favicon.ico` | 浏览器标签页图标；`.ico` 还用于 Windows 桌面快捷方式 |
+| `icon-192.png` / `icon-512.png` | PWA 安装后的桌面/任务栏图标 |
+| `icon-maskable-512.png` | Android 自适应图标（不会被裁掉） |
+| `apple-touch-icon.png` | iOS「添加到主屏幕」的图标 |
+
 ## 想换图
 
 **用同名文件直接覆盖即可**，不用改任何代码。比如换肉夹馍，就把新图命名为 `roujiamo.jpg` 覆盖进去。
