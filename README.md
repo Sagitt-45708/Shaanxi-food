@@ -4,6 +4,9 @@
 
 一个介绍陕西美食的静态网页，纯 HTML + CSS + 原生 JavaScript，**不需要服务器**，双击 `index.html` 就能看。
 
+**线上地址：** https://sagitt-45708.github.io/Shaanxi-food/
+**仓库：** https://github.com/Sagitt-45708/Shaanxi-food
+
 课程：Web Technologies　｜　完成时间：2026 年 11 月
 
 ---
