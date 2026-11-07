@@ -292,4 +292,13 @@
 
     sections.forEach(function (section) { observer.observe(section); });
   }
+
+  /* ---------- ⑤ 注册 Service Worker（离线可用 / 添加到主屏幕） ---------- */
+  if ('serviceWorker' in navigator && location.protocol.indexOf('http') === 0) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').catch(function () {
+        // file:// 或隐私模式下注册失败，不影响页面本身
+      });
+    });
+  }
 })();

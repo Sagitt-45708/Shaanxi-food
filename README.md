@@ -20,12 +20,15 @@
 ```
 shaanxi-food/
 ├── index.html          页面结构（唯一页面）
+├── manifest.webmanifest  PWA 清单（名称、图标、全屏显示）
+├── sw.js               离线缓存（Service Worker）
 ├── css/
-│   └── style.css       全部样式，按 1~13 节注释分区
+│   └── style.css       全部样式，按 1~14 节注释分区
 ├── js/
-│   └── main.js         三个小功能：筛选 / 弹窗 / 导航高亮
+│   └── main.js         筛选 / 弹窗 / 添加菜品 / 导航高亮 / 注册 SW
 ├── images/
 │   ├── favicon.svg     站点小图标
+│   ├── icon-192.png 等 PWA 图标（含 maskable 与 iOS 图标）
 │   ├── 8 张菜品实拍图   roujiamo.jpg 等，见 images/README.md
 │   └── README.md       图片文件名与尺寸约定
 └── README.md
@@ -56,7 +59,25 @@ shaanxi-food/
 - **换图**：直接用同名文件覆盖 `images/` 里的图片即可（文件名见 `images/README.md`），不用改代码。想新增一道菜并配图，复制一张图进来，把 `<img class="dish-photo" src="images/xxx.jpg" alt="菜名">` 里的路径改掉。
 - **改配色**：只改 `css/style.css` 开头 `:root` 里的变量，全站跟着变。
 
-## 五、Git 提交规范
+## 五、移动端与 PWA
+
+页面在 `960px` 和 `600px` 两个断点做了适配：首屏单栏、卡片单列、筛选按钮可换行、弹窗收窄。320px 宽也不会横向滚动。
+
+**添加到主屏幕**
+
+- **Android / Chrome**：右上角菜单 →「安装应用」或「添加到主屏幕」
+- **iOS / Safari**：底部分享按钮 →「添加到主屏幕」
+
+加完点开是全屏显示，没有地址栏，图标是橙色底 + 奶油色「陕」字。
+
+**离线可用**
+
+`sw.js` 会把 HTML、CSS、JS、图片缓存到本地，第二次打开不需要网络。注意两点：
+
+1. Service Worker 只在 **https 或 localhost** 下生效；直接双击 `index.html`（`file://`）时会自动跳过，不影响页面本身。
+2. **改了页面内容后，要把 `sw.js` 开头的 `CACHE` 版本号 +1**（比如 `sanqin-v1` → `sanqin-v2`），否则用户手机里还是旧缓存。
+
+## 六、Git 提交规范
 
 考核看的是 **commit 历史**，所以每个 commit 只做一件事，信息写清楚。
 
@@ -97,6 +118,8 @@ shaanxi-food/
 | 14 | `docs: 更新图片使用说明` | 目录结构、换图方式 |
 | 15 | `feat: 添加「添加一道菜」按钮与表单` | 按钮、弹窗表单、即时生成卡片 |
 | 16 | `feat: 图片压缩与本地保存` | Canvas 压缩、localStorage 持久化、删除卡片 |
+| 17 | `feat: 添加站点分享封面图` | og-cover.jpg、Open Graph 标签、README 横幅 |
+| 18 | `feat: 添加 PWA 支持` | manifest、图标、Service Worker 离线缓存 |
 
 ### 常用命令
 
@@ -108,7 +131,7 @@ git push                       # 推到 GitHub
 git log --oneline --graph      # 看提交历史
 ```
 
-## 六、验收清单
+## 七、验收清单
 
 - [ ] 双击 `index.html` 能正常显示，无外部依赖
 - [ ] 三个筛选按钮都能正确过滤卡片
