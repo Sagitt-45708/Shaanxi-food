@@ -65,8 +65,9 @@ shaanxi-food/
 
 **添加到主屏幕**
 
-- **Android / Chrome**：右上角菜单 →「安装应用」或「添加到主屏幕」
-- **iOS / Safari**：底部分享按钮 →「添加到主屏幕」
+- **页面上有一键按钮**：首屏「安装到桌面」，Chrome / Edge / Android 下点一下就会弹系统安装框
+- **Android / Chrome**：也可以走右上角菜单 →「安装应用」或「添加到主屏幕」
+- **iOS / Safari**：点「安装到桌面」会弹出三步图示说明（分享 → 添加到主屏幕 → 添加），因为 iOS 不支持一键安装
 
 加完点开是全屏显示，没有地址栏，图标是橙色底 + 奶油色「陕」字。
 
@@ -120,6 +121,7 @@ shaanxi-food/
 | 16 | `feat: 图片压缩与本地保存` | Canvas 压缩、localStorage 持久化、删除卡片 |
 | 17 | `feat: 添加站点分享封面图` | og-cover.jpg、Open Graph 标签、README 横幅 |
 | 18 | `feat: 添加 PWA 支持` | manifest、图标、Service Worker 离线缓存 |
+| 19 | `feat: 添加「安装到桌面」按钮` | 首屏安装按钮 + iOS 手动安装说明 |
 
 ### 常用命令
 

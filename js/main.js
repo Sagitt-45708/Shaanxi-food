@@ -301,4 +301,47 @@
       });
     });
   }
+
+  /* ---------- ⑥ 安装到桌面 ---------- */
+  var installBtn = document.getElementById('installBtn');
+  var installDialog = document.getElementById('installDialog');
+  var deferredPrompt = null;
+
+  // Chrome / Edge / Android：浏览器判断可安装时，先把事件存下来
+  window.addEventListener('beforeinstallprompt', function (event) {
+    event.preventDefault();
+    deferredPrompt = event;
+    installBtn.hidden = false;
+  });
+
+  // iOS Safari 不触发上面的事件，只能给手动步骤
+  var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  var isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+                     window.navigator.standalone === true;
+  if (isIOS && !isStandalone) installBtn.hidden = false;
+
+  installBtn.addEventListener('click', function () {
+    if (!deferredPrompt) {
+      installDialog.showModal();
+      return;
+    }
+
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(function () {
+      deferredPrompt = null;
+      installBtn.hidden = true;
+    });
+  });
+
+  document.querySelectorAll('[data-close="install"]').forEach(function (btn) {
+    btn.addEventListener('click', function () { installDialog.close(); });
+  });
+
+  installDialog.addEventListener('click', function (event) {
+    if (event.target === installDialog) installDialog.close();
+  });
+
+  window.addEventListener('appinstalled', function () {
+    installBtn.hidden = true;
+  });
 })();
