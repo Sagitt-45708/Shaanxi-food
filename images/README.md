@@ -1,33 +1,34 @@
-# 图片说明
+# Images
 
-八张菜品图已经接入页面，`index.html` 里用 `<img class="dish-photo" src="images/xxx.jpg" alt="菜名">` 引用，样式由 `.dish-photo` 控制（4:3 裁切、粗描边、圆角）。
+Eight dish photos are already wired into the page through `<img class="dish-photo" src="images/xxx.jpg" alt="...">`. The `.dish-photo` rule crops them to 4:3, adds the stencil border and rounds the corners.
 
-| 文件名 | 对应菜品 |
+| File | Dish |
 | --- | --- |
-| `roujiamo.jpg` | 肉夹馍 |
-| `yangrou-paomo.jpg` | 羊肉泡馍 |
-| `biangbiang.jpg` | biangbiang 面 |
-| `saozi-mian.jpg` | 岐山臊子面 |
-| `liangpi.jpg` | 凉皮 |
-| `hulutou.jpg` | 葫芦头泡馍 |
-| `zenggao.jpg` | 甑糕 |
-| `shizibing.jpg` | 黄桂柿子饼 |
+| `roujiamo.jpg` | Roujiamo |
+| `yangrou-paomo.jpg` | Yangrou paomo |
+| `biangbiang.jpg` | Biangbiang noodles |
+| `saozi-mian.jpg` | Qishan saozi noodles |
+| `liangpi.jpg` | Liangpi |
+| `hulutou.jpg` | Hulutou paomo |
+| `zenggao.jpg` | Zenggao |
+| `shizibing.jpg` | Persimmon cakes |
 
-## 图标文件
+## Swapping a photo
 
-| 文件 | 用途 |
+Overwrite the file with the same name — no code changes needed. For a new dish, drop the image in here and point an `<img>` at it.
+
+## Requirements
+
+- `.jpg` or `.webp`, around 800px wide, under 300KB each.
+- 4:3 is ideal; other ratios are fine — cropped from the centre, never stretched.
+- Copyright: use your own photos, or images explicitly free for reuse (Pexels / Unsplash). Avoid watermarked images and pictures lifted from social platforms.
+
+## Icons
+
+| File | Used for |
 | --- | --- |
-| `favicon.svg` / `favicon.ico` | 浏览器标签页图标；`.ico` 还用于 Windows 桌面快捷方式 |
-| `icon-192.png` / `icon-512.png` | PWA 安装后的桌面/任务栏图标 |
-| `icon-maskable-512.png` | Android 自适应图标（不会被裁掉） |
-| `apple-touch-icon.png` | iOS「添加到主屏幕」的图标 |
-
-## 想换图
-
-**用同名文件直接覆盖即可**，不用改任何代码。比如换肉夹馍，就把新图命名为 `roujiamo.jpg` 覆盖进去。
-
-## 图片要求
-
-- 格式 `.jpg` 或 `.webp`，宽 800px 左右，单张别超过 300KB（仓库太大会很慢）。
-- 比例最好是 **4:3**；其他比例也能用，页面会按 `object-fit: cover` 居中裁切，不会拉变形。
-- 版权：用自己拍的，或明确可免费商用的图库（Pexels / Unsplash）的图。不要用带水印、或来自小红书 / 视觉中国 / 花瓣等平台的图。
+| `favicon.svg` / `favicon.ico` | Browser tab; the `.ico` also works for Windows shortcuts |
+| `icon-192.png` / `icon-512.png` | Home-screen icon after installing the PWA |
+| `icon-maskable-512.png` | Android adaptive icon (not cropped) |
+| `apple-touch-icon.png` | iOS "Add to Home Screen" |
+| `og-cover.jpg` | Share preview (Open Graph) |

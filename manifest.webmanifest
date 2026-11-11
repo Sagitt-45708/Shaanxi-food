@@ -1,8 +1,8 @@
 {
-  "name": "陕西美食 · 三秦味道",
-  "short_name": "三秦味道",
-  "description": "肉夹馍、羊肉泡馍、biangbiang 面、凉皮、臊子面……用一张网页认识三秦大地的味道。",
-  "lang": "zh-CN",
+  "name": "Flavors of Sanqin · Shaanxi Food",
+  "short_name": "Sanqin",
+  "description": "Roujiamo, yangrou paomo, biangbiang noodles, liangpi and more — the food of Shaanxi on one page.",
+  "lang": "en",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

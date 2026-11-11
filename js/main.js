@@ -1,15 +1,16 @@
 /* =========================================================
-   陕西美食 · 三秦味道
-   脚本文件：js/main.js
-   功能：① 分类筛选 ② 详情弹窗 ③ 添加美食 ④ 导航高亮
-   说明：纯原生 JS，不依赖任何框架，双击 index.html 即可运行。
+   Flavors of Sanqin · Shaanxi Food
+   Script: js/main.js
+   Features: ① filter ② dish dialog ③ add a dish ④ nav highlight
+             ⑤ service worker ⑥ install prompt
+   Vanilla JS only — no framework, no build step.
    ========================================================= */
 (function () {
   'use strict';
 
-  var CAT_LABELS = { mian: '面食', mo: '馍类', snack: '小吃' };
+  var CAT_LABELS = { mian: 'Noodles', mo: 'Buns', snack: 'Snacks' };
 
-  // 访客添加的菜存本机浏览器里，刷新后还在
+  // Dishes added by a visitor live in this browser's storage
   var STORAGE_KEY = 'shaanxi-food-user-dishes-v1';
 
   function loadUserDishes() {
@@ -36,11 +37,11 @@
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
     } catch (err) {
-      console.warn('本地保存失败，可能是图片太大：', err);
+      console.warn('Could not save locally — the image may be too large:', err);
     }
   }
 
-  // 把图片压到最长边 900px 的 JPEG，避免撑爆 localStorage
+  // Downscale to a 900px JPEG so it fits inside localStorage
   function readImage(file) {
     return new Promise(function (resolve, reject) {
       var reader = new FileReader();
@@ -62,12 +63,12 @@
     });
   }
 
-  // 每次现查：因为用户可以随时往网格里加卡片
+  // Query every time — visitors can add cards at any moment
   function getCards() {
     return Array.prototype.slice.call(document.querySelectorAll('.dish-card'));
   }
 
-  /* ---------- ① 分类筛选 ---------- */
+  /* ---------- ① Filter ---------- */
   var filterButtons = document.querySelectorAll('.filter');
   var countLabel = document.getElementById('filterCount');
   var currentFilter = 'all';
@@ -82,14 +83,14 @@
       if (match) shown += 1;
     });
 
-    // 更新按钮的选中状态（无障碍：aria-pressed）
+    // Sync the pressed state for screen readers
     filterButtons.forEach(function (btn) {
       var active = btn.dataset.filter === category;
       btn.classList.toggle('is-active', active);
       btn.setAttribute('aria-pressed', String(active));
     });
 
-    countLabel.textContent = '共 ' + shown + ' 道';
+    countLabel.textContent = shown + (shown === 1 ? ' dish' : ' dishes');
   }
 
   filterButtons.forEach(function (btn) {
@@ -98,13 +99,13 @@
     });
   });
 
-  /* ---------- ② 详情弹窗 ---------- */
+  /* ---------- ② Dish dialog ---------- */
   var dialog = document.getElementById('dishDialog');
   var dialogTitle = document.getElementById('dishDialogTitle');
   var dialogBody = document.getElementById('dishDialogBody');
   var grid = document.getElementById('dishGrid');
 
-  // 事件委托：静态卡片和后来添加的卡片都能点开
+  // Event delegation: static cards and visitor-added cards behave the same
   grid.addEventListener('click', function (event) {
     var trigger = event.target.closest('.dish-open');
     if (!trigger) return;
@@ -120,12 +121,12 @@
     } else {
       var lead = document.createElement('p');
       lead.className = 'detail-lead';
-      lead.textContent = card.dataset.desc || '这道菜还没有详细介绍。';
+      lead.textContent = card.dataset.desc || 'No description for this dish yet.';
       dialogBody.appendChild(lead);
 
       var tip = document.createElement('p');
       tip.className = 'detail-tip';
-      tip.textContent = '这张卡片是后来添加的，刷新页面后仍然保留（保存在本机浏览器里）。';
+      tip.textContent = 'This card was added on this device and is saved in this browser.';
       dialogBody.appendChild(tip);
     }
 
@@ -136,12 +137,12 @@
     dialog.close();
   });
 
-  // 点击遮罩关闭：只有点在 dialog 本身（而不是内容区）时才算
+  // Close on backdrop click only — clicks inside the dialog bubble up too
   dialog.addEventListener('click', function (event) {
     if (event.target === dialog) dialog.close();
   });
 
-  /* ---------- ③ 添加美食 ---------- */
+  /* ---------- ③ Add a dish ---------- */
   var addDialog = document.getElementById('addDialog');
   var addForm = document.getElementById('addForm');
   var addName = document.getElementById('addName');
@@ -151,7 +152,7 @@
   var addFile = document.getElementById('addFile');
   var addPreview = document.getElementById('addPreview');
 
-  // 根据数据生成一张卡片，结构跟静态卡片保持一致
+  // Build a card with the same markup as the static ones
   function createUserCard(dish) {
     var card = document.createElement('article');
     card.className = 'dish-card';
@@ -168,7 +169,7 @@
 
     var chip = document.createElement('span');
     chip.className = 'dish-chip';
-    chip.textContent = CAT_LABELS[dish.cat] || '其他';
+    chip.textContent = CAT_LABELS[dish.cat] || 'Other';
     card.appendChild(chip);
 
     var h3 = document.createElement('h3');
@@ -183,7 +184,7 @@
 
     var meta = document.createElement('p');
     meta.className = 'dish-meta';
-    meta.textContent = dish.meta || '访客添加';
+    meta.textContent = dish.meta || 'Added by a visitor';
     card.appendChild(meta);
 
     var summary = document.createElement('p');
@@ -197,11 +198,11 @@
     arrow.textContent = '→';
     card.appendChild(arrow);
 
-    // 自己加的卡片可以删掉
+    // A card you added yourself can be removed again
     var del = document.createElement('button');
     del.type = 'button';
     del.className = 'dish-del';
-    del.setAttribute('aria-label', '删除「' + dish.name + '」');
+    del.setAttribute('aria-label', 'Remove ' + dish.name);
     del.textContent = '×';
     del.addEventListener('click', function (event) {
       event.stopPropagation();
@@ -230,7 +231,7 @@
     if (event.target === addDialog) addDialog.close();
   });
 
-  // 选完图片先给个预览
+  // Preview the chosen photo before uploading
   addFile.addEventListener('change', function () {
     var file = addFile.files && addFile.files[0];
     if (!file) return;
@@ -252,7 +253,7 @@
         name: name,
         cat: addCat.value,
         desc: addDesc.value.trim(),
-        meta: addMeta.value.trim() || '访客添加',
+        meta: addMeta.value.trim() || 'Added by a visitor',
         img: dataUrl
       });
 
@@ -264,17 +265,17 @@
       card.scrollIntoView({ behavior: 'smooth', block: 'center' });
       card.querySelector('.dish-open').focus();
     }).catch(function () {
-      alert('图片读不出来，换一张试试（建议 JPG / PNG）。');
+      alert('That image could not be read. Try a JPG or PNG.');
     });
   });
 
-  // 页面打开时，把之前添加过的卡片放回网格
+  // Put any previously added cards back into the grid on load
   loadUserDishes().forEach(function (dish) {
     grid.appendChild(createUserCard(dish));
   });
   filterDishes('all');
 
-  /* ---------- ④ 滚动时高亮当前导航 ---------- */
+  /* ---------- ④ Highlight the nav item in view ---------- */
   var navLinks = document.querySelectorAll('.site-nav a[data-nav]');
   var sections = ['foods', 'culture', 'plan']
     .map(function (id) { return document.getElementById(id); })
@@ -293,21 +294,21 @@
     sections.forEach(function (section) { observer.observe(section); });
   }
 
-  /* ---------- ⑤ 注册 Service Worker（离线可用 / 添加到主屏幕） ---------- */
+  /* ---------- ⑤ Service worker (offline / installable) ---------- */
   if ('serviceWorker' in navigator && location.protocol.indexOf('http') === 0) {
     window.addEventListener('load', function () {
       navigator.serviceWorker.register('sw.js').catch(function () {
-        // file:// 或隐私模式下注册失败，不影响页面本身
+        // file:// or private mode — the page itself still works
       });
     });
   }
 
-  /* ---------- ⑥ 安装到手机 / 桌面 ---------- */
+  /* ---------- ⑥ Install on phone / desktop ---------- */
   var installBtn = document.getElementById('installBtn');
   var installDialog = document.getElementById('installDialog');
   var deferredPrompt = null;
 
-  // 支持一键安装的浏览器会抛这个事件，先存下来，点按钮时再弹系统框
+  // Browsers that support one-tap install fire this; stash it for the button
   window.addEventListener('beforeinstallprompt', function (event) {
     event.preventDefault();
     deferredPrompt = event;
@@ -319,10 +320,10 @@
   var isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
                      window.navigator.standalone === true;
 
-  // 已经装成 App 了，就不必再显示按钮
+  // Already installed — no need for the button
   if (isStandalone) installBtn.hidden = true;
 
-  // 点到按钮但没法一键安装时，按平台给对应步骤
+  // No one-tap install available: show steps for the right platform
   function openInstallHelp() {
     installDialog.querySelectorAll('[data-platform]').forEach(function (block) {
       block.hidden = true;

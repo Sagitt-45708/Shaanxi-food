@@ -1,12 +1,12 @@
 /* =========================================================
-   陕西美食 · 三秦味道
-   Service Worker：让页面离线也能打开
-   注意：改了页面内容后，把 CACHE 版本号 +1，用户才会拿到新版。
+   Flavors of Sanqin · Shaanxi Food
+   Service worker: keeps the site usable offline.
+   After changing any page, bump CACHE so visitors get the new files.
    ========================================================= */
 
-var CACHE = 'sanqin-v3';
+var CACHE = 'sanqin-v4';
 
-// 核心文件：缺一个就装不上，所以只放一定存在的
+// Core files — if one of these is missing the install fails, so keep it tight
 var CORE = [
   './',
   './index.html',
@@ -16,7 +16,7 @@ var CORE = [
   './images/favicon.svg'
 ];
 
-// 图片：单独加载，某张缺失也不影响安装
+// Photos and icons: added one by one, a missing file doesn't break the install
 var MEDIA = [
   './images/roujiamo.jpg',
   './images/yangrou-paomo.jpg',
@@ -37,7 +37,7 @@ self.addEventListener('install', function (event) {
     caches.open(CACHE).then(function (cache) {
       return cache.addAll(CORE).then(function () {
         return Promise.all(MEDIA.map(function (url) {
-          return cache.add(url).catch(function () { /* 单张失败就跳过 */ });
+          return cache.add(url).catch(function () { /* skip a missing photo */ });
         }));
       });
     }).then(function () { return self.skipWaiting(); })
@@ -56,7 +56,7 @@ self.addEventListener('activate', function (event) {
   );
 });
 
-// 先给缓存（快），同时在后台更新（新）
+// Serve from cache first (fast), refresh in the background (fresh)
 self.addEventListener('fetch', function (event) {
   var request = event.request;
   if (request.method !== 'GET') return;
@@ -75,7 +75,7 @@ self.addEventListener('fetch', function (event) {
         }
         return response;
       }).catch(function () {
-        // 断网：有缓存用缓存，导航请求兜底到首页
+        // Offline: fall back to cache, and to the home page for navigation
         return cached || caches.match('./index.html');
       });
 

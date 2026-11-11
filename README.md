@@ -1,146 +1,72 @@
-# 陕西美食 · 三秦味道
+# Flavors of Sanqin · Shaanxi Food
 
-![陕西美食 · 三秦味道](images/og-cover.jpg)
+![Flavors of Sanqin](images/og-cover.jpg)
 
-一个介绍陕西美食的静态网页，纯 HTML + CSS + 原生 JavaScript，**不需要服务器**，双击 `index.html` 就能看。
+A static single-page site about the food of Shaanxi — plain HTML, CSS and vanilla JavaScript. **No server, no framework, no build step**: double-click `index.html` and it runs, offline too.
 
-**线上地址：** https://sagitt-45708.github.io/Shaanxi-food/
-**仓库：** https://github.com/Sagitt-45708/Shaanxi-food
-
-课程：Web Technologies　｜　完成时间：2026 年 11 月
+**Live:** https://sagitt-45708.github.io/Shaanxi-food/
+**Repo:** https://github.com/Sagitt-45708/Shaanxi-food
 
 ---
 
-## 一、怎么预览
+## What's on the page
 
-1. 在文件夹里双击 `index.html`，用浏览器打开即可。
-2. （可选）用 VSCode 打开整个 `shaanxi-food` 文件夹，安装 "Live Server" 插件，右键 → Open with Live Server，改代码会自动刷新。
+| Section | Content |
+| --- | --- |
+| Header | Sticky nav; the active item follows the scroll |
+| Hero | Headline, three floating dish cards, install button |
+| Marquee | Pure-CSS scrolling band of dish names |
+| Stats | 8 dishes · 3000 years · 50+ strokes · 1 carb capital |
+| Food | Eight photo cards, filterable, each with a detail dialog |
+| Culture | Tearing bread, the *biang* character, the Sanqin combo |
+| One Day | Breakfast to midnight in Xi'an |
+| Footer | Course credit, back to top |
 
-> 页面不加载任何外部字体、图片或 CDN，断网也能正常显示。
+Three interactions: **filter** by noodles / buns / snacks, a native `<dialog>` **detail pop-up**, and **add a dish** — pick a local photo, give it a name, and the card is saved in `localStorage` (image downscaled to 900px through `<canvas>` first).
 
-## 二、目录结构
+## How to run it
+
+Double-click `index.html`, or open the folder in VS Code and use Live Server. No external requests, no fonts or scripts from a CDN.
+
+## Structure
 
 ```
 shaanxi-food/
-├── index.html          页面结构（唯一页面）
-├── manifest.webmanifest  PWA 清单（名称、图标、全屏显示）
-├── sw.js               离线缓存（Service Worker）
-├── css/
-│   └── style.css       全部样式，按 1~14 节注释分区
-├── js/
-│   └── main.js         筛选 / 弹窗 / 添加菜品 / 导航高亮 / 注册 SW
-├── images/
-│   ├── favicon.svg     站点小图标
-│   ├── icon-192.png 等 PWA 图标（含 maskable 与 iOS 图标）
-│   ├── 8 张菜品实拍图   roujiamo.jpg 等，见 images/README.md
-│   └── README.md       图片文件名与尺寸约定
+├── index.html            the page
+├── manifest.webmanifest  PWA manifest
+├── sw.js                 offline cache
+├── css/style.css         all styles, 13 numbered sections
+├── js/main.js            filter · dialog · add a dish · nav · install
+├── images/               8 photos, icons, cover, favicon
 └── README.md
 ```
 
-## 三、页面里有什么
+## Editing
 
-| 区块 | 内容 |
-| --- | --- |
-| 顶部导航 | 固定顶栏、品牌标记、三项锚点导航、开吃按钮 |
-| 首屏 | 主标题 + 马克笔高亮 + 三张漂浮菜品卡 + 圆形贴纸 |
-| 滚动条幅 | 纯 CSS 无缝滚动展示招牌菜名 |
-| 数据条 | 4 个数字：8 道菜、3000 年、50+ 画、1 座碳水之都 |
-| 美食列表 | 8 道菜卡片，可筛选「全部 / 面食 / 馍类 / 小吃」，点卡片弹出详情 |
-| 添加菜品 | 点「＋ 添加一道菜」选本地图片、填菜名与分类，即时生成新卡片，存在浏览器本地 |
-| 文化 | 掰馍、biang 字、三秦套餐 3 张卡 |
-| 一日食单 | 从 07:00 到 22:00 的时间线 |
-| 页脚 | 课程信息、回到顶部 |
+- **Text** — edit the copy in `index.html`.
+- **Add a dish** — copy an `<article class="dish-card" data-cat="mo">…</article>` block, change `data-cat`, the name, the summary and the `<template>` detail.
+- **Swap a photo** — overwrite the file in `images/` with the same filename; the CSS already handles the 4:3 crop.
+- **Colours** — change the variables under `:root` in `css/style.css`; the whole site follows.
 
-技术点：语义化标签（header/main/section/article/footer）、CSS 变量、Grid + Flex 布局、媒体查询响应式、`:focus-visible` 键盘焦点、`prefers-reduced-motion`、原生 `<dialog>`、`IntersectionObserver` 导航高亮、`<template>` 存详情内容、纯 CSS 滚动条幅与漂浮动画、图片懒加载（`loading="lazy"`）、`FileReader` + `Canvas` 压缩图片、`localStorage` 本地保存。
+## Mobile
 
-视觉风格：**年轻活泼**——奶油底色、粗黑描边、硬阴影（贴纸感）、马克笔高亮标题、橙 / 黄 / 绿 / 紫撞色。
+Below 960px the hero becomes single-column and the floating cards hide; below 600px the nav tightens, buttons go full-width and the grid becomes one column.
 
-## 四、怎么改
+The site is a PWA: "Install on phone" in the hero (or the browser menu) adds it to the home screen, where it opens full-screen and works offline.
 
-- **改文字**：直接改 `index.html` 里对应卡片的中文。
-- **加一道菜**：复制一个 `<article class="dish-card" data-cat="mo">…</article>`，改 `data-cat`、emoji、标题、简介和 `<template>` 里的详情。
-- **换图**：直接用同名文件覆盖 `images/` 里的图片即可（文件名见 `images/README.md`），不用改代码。想新增一道菜并配图，复制一张图进来，把 `<img class="dish-photo" src="images/xxx.jpg" alt="菜名">` 里的路径改掉。
-- **改配色**：只改 `css/style.css` 开头 `:root` 里的变量，全站跟着变。
+> After editing any page, bump `CACHE` in `sw.js` (`sanqin-v4` → `v5`), otherwise returning visitors keep the old copy.
 
-## 五、移动端与 PWA
+## Git
 
-页面在 `960px` 和 `600px` 两个断点做了适配：首屏单栏、卡片单列、筛选按钮可换行、弹窗收窄。320px 宽也不会横向滚动。
-
-**添加到主屏幕**
-
-- **页面上有一键按钮**：首屏「安装到桌面」，Chrome / Edge / Android 下点一下就会弹系统安装框
-- **Android / Chrome**：也可以走右上角菜单 →「安装应用」或「添加到主屏幕」
-- **iOS / Safari**：点「安装到桌面」会弹出三步图示说明（分享 → 添加到主屏幕 → 添加），因为 iOS 不支持一键安装
-
-加完点开是全屏显示，没有地址栏，图标是橙色底 + 奶油色「陕」字。
-
-**离线可用**
-
-`sw.js` 会把 HTML、CSS、JS、图片缓存到本地，第二次打开不需要网络。注意两点：
-
-1. Service Worker 只在 **https 或 localhost** 下生效；直接双击 `index.html`（`file://`）时会自动跳过，不影响页面本身。
-2. **改了页面内容后，要把 `sw.js` 开头的 `CACHE` 版本号 +1**（比如 `sanqin-v1` → `sanqin-v2`），否则用户手机里还是旧缓存。
-
-## 六、Git 提交规范
-
-考核看的是 **commit 历史**，所以每个 commit 只做一件事，信息写清楚。
-
-格式：
-
-```
-<类型>: <一句话说明>
-
-<可选的详细说明，写清楚改了什么、为什么>
-```
-
-| 类型 | 用在哪 |
-| --- | --- |
-| `feat` | 新增功能或区块 |
-| `fix` | 修 bug |
-| `style` | 只改样式 / 格式，不改功能 |
-| `content` | 只改文字内容 |
-| `docs` | README 等文档 |
-| `chore` | 配置、杂项 |
-
-### 提交记录
-
-| # | 提交信息 | 内容 |
-| --- | --- | --- |
-| 1 | `chore: 初始化项目结构` | 目录骨架、`.gitignore`、README、HTML 模板 |
-| 2 | `style: 建立设计变量与基础样式` | 配色变量、重置、排版、按钮 |
-| 3 | `feat: 添加顶部导航` | 固定顶栏、品牌、导航、开吃按钮 |
-| 4 | `feat: 搭建首屏与漂浮卡片` | 主标题高亮、引导按钮、漂浮卡片 |
-| 5 | `feat: 添加滚动条幅与数据条` | 无缝滚动条幅、四个数据卡 |
-| 6 | `feat: 添加 8 道美食卡片` | 卡片网格 + 详情 template |
-| 7 | `feat: 实现分类筛选` | 按分类过滤、更新计数 |
-| 8 | `feat: 实现美食详情弹窗` | `<dialog>` 打开 / 关闭 |
-| 9 | `feat: 添加文化介绍与一日食单` | 文化卡 + 时间线 |
-| 10 | `style: 完成页脚与响应式适配` | 页脚、两个断点、减少动效 |
-| 11 | `feat: 导航随滚动高亮` | IntersectionObserver |
-| 12 | `docs: 完善 README 与站点图标` | 文档、favicon、图片说明 |
-| 13 | `feat: 使用实拍图替换图形占位` | 8 张实拍图接入卡片 |
-| 14 | `docs: 更新图片使用说明` | 目录结构、换图方式 |
-| 15 | `feat: 添加「添加一道菜」按钮与表单` | 按钮、弹窗表单、即时生成卡片 |
-| 16 | `feat: 图片压缩与本地保存` | Canvas 压缩、localStorage 持久化、删除卡片 |
-| 17 | `feat: 添加站点分享封面图` | og-cover.jpg、Open Graph 标签、README 横幅 |
-| 18 | `feat: 添加 PWA 支持` | manifest、图标、Service Worker 离线缓存 |
-| 19 | `feat: 添加「安装到桌面」按钮` | 首屏安装按钮 + iOS 手动安装说明 |
-
-### 常用命令
+Commits follow Conventional Commits — `feat:`, `style:`, `docs:`, `chore:` — one concern each, with a body explaining what changed and why.
 
 ```bash
-git status                     # 看改了什么
-git add index.html css/ js/    # 暂存
-git commit -m "feat: 添加美食卡片"
-git push                       # 推到 GitHub
-git log --oneline --graph      # 看提交历史
+git status
+git add -A
+git commit -m "feat: describe the change"
+git push
 ```
 
-## 七、验收清单
+## Credits
 
-- [ ] 双击 `index.html` 能正常显示，无外部依赖
-- [ ] 三个筛选按钮都能正确过滤卡片
-- [ ] 点任意卡片能弹出详情，Esc / 点遮罩能关闭
-- [ ] 手机宽度（< 600px）下不横向滚动
-- [ ] GitHub 仓库公开可访问，commit 信息可读
-- [ ] README 在线显示正常
+Written from public sources for a Web Technologies course project. Photos are used for coursework only, not for commercial purposes.
